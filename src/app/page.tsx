@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Image from 'next/image';
-import { Check, MessageCircle, BarChart, FileText, Bot, Users, PieChart } from 'lucide-react';
+import { Check, MessageCircle, BarChart, FileText, Bot, Users, PieChart, Headphones } from 'lucide-react';
 import { HeroIllustration } from '@/components/HeroIllustration';
 
 const features = [
@@ -126,20 +126,22 @@ const pricingTiers = [
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-background">
-       <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-sm">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+       <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
+            <div className="flex h-20 items-center justify-between">
                 <Link href="/" aria-label="Back to homepage">
                     <div className="flex items-center gap-2">
-                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={32} height={32} />
-                        <span className="font-bold text-xl text-foreground">Surveyr</span>
+                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={48} height={48} />
+                        <span className="font-bold text-2xl text-foreground tracking-tighter">surveyr</span>
                     </div>
                 </Link>
-                <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+                <nav className="hidden md:flex items-center gap-8 text-base font-medium">
+                    <Link href="#testimonials" className="text-muted-foreground hover:text-foreground">Testimonials</Link>
                     <Link href="#features" className="text-muted-foreground hover:text-foreground">Features</Link>
                     <Link href="#pricing" className="text-muted-foreground hover:text-foreground">Pricing</Link>
                     <Link href="#use-cases" className="text-muted-foreground hover:text-foreground">Use Cases</Link>
+                    <Link href="/contact-us" className="text-muted-foreground hover:text-foreground">Contact Us</Link>
                 </nav>
                 <div className="flex items-center gap-4">
                     <Button variant="ghost" asChild>
@@ -153,40 +155,35 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center animate-in fade-in duration-500 pt-16">
+      <main className="flex-1 flex flex-col items-center pt-20">
         {/* Hero Section */}
-        <section className="text-center py-20 lg:py-28 container mx-auto">
+        <section className="text-center py-16 lg:py-24 container mx-auto w-full relative">
             <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div className="text-left">
-                    <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 font-headline text-foreground leading-tight">
-                        Supercharge your conversations with <span className="text-primary">Surveyr</span>
+                    <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 font-headline text-foreground leading-tight">
+                        Supercharge your conversations with <span className="text-gradient">Surveyr</span>
                     </h1>
-                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-                        A WhatsApp driven platform for engaging customer chats, capturing leads, collecting valuable feedback and boosting live events.
+                    <p className="text-lg md:text-xl text-muted-foreground max-w-xl">
+                        A WhatsApp driven platform for engaging customer chats, <span className="highlight">capturing leads</span>, <span className="highlight">collecting valuable feedback</span> and boosting live events.
                     </p>
-                    <div className="mt-8 flex gap-4">
-                        <Button size="lg" asChild>
-                            <Link href="/signup">Get Started Free</Link>
-                        </Button>
-                        <Button size="lg" variant="outline" asChild>
-                            <Link href="#use-cases">See Use Cases</Link>
-                        </Button>
-                    </div>
                 </div>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center -mr-16">
                   <HeroIllustration />
                 </div>
             </div>
+            <Button size="icon" className="rounded-full h-16 w-16 absolute bottom-8 right-8 shadow-lg">
+                <Headphones className="h-8 w-8" />
+            </Button>
         </section>
 
         {/* Testimonials Section */}
-        <section className="w-full bg-white py-20 lg:py-28">
+        <section id="testimonials" className="w-full bg-secondary py-20 lg:py-28">
             <div className="container mx-auto text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-2">Testimonials</h2>
                 <p className="text-muted-foreground mb-12">What our users are saying</p>
                 <div className="grid md:grid-cols-3 gap-8">
                     {testimonials.map(t => (
-                        <Card key={t.name} className="text-left bg-card">
+                        <Card key={t.name} className="text-left bg-card shadow-md">
                             <CardContent className="p-6">
                                 <blockquote className="italic text-muted-foreground">"{t.text}"</blockquote>
                                 <div className="flex items-center gap-4 mt-6">
@@ -222,13 +219,13 @@ export default function Home() {
         </section>
         
         {/* Pricing Section */}
-        <section id="pricing" className="w-full bg-white py-20 lg:py-28">
+        <section id="pricing" className="w-full bg-secondary py-20 lg:py-28">
             <div className="container mx-auto text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-2">Pricing</h2>
-                <p className="text-muted-foreground mb-12">A day trial on our Pro and Business plans</p>
+                <p className="text-muted-foreground mb-12">7-day trial on our Pro and Business plans</p>
                  <div className="grid lg:grid-cols-4 gap-8">
                     {pricingTiers.map(tier => (
-                        <Card key={tier.name} className={`flex flex-col ${tier.popular ? 'border-primary border-2' : ''}`}>
+                        <Card key={tier.name} className={`flex flex-col shadow-md ${tier.popular ? 'border-primary border-2' : 'bg-card'}`}>
                             <CardHeader className="text-left">
                                 <h3 className="text-xl font-bold">{tier.name}</h3>
                                 <p className="text-3xl font-bold">{tier.price}</p>
@@ -278,7 +275,7 @@ export default function Home() {
         <section id="use-cases" className="py-20 lg:py-28 container mx-auto text-center w-full bg-primary text-primary-foreground">
              <h2 className="text-3xl md:text-4xl font-bold mb-2">Use Cases</h2>
              <p className="opacity-80 mb-4">Discover how Surveyr is used by others on our WhatsApp platform</p>
-             <div className="max-w-4xl mx-auto bg-white/10 p-8 rounded-lg mb-12">
+             <div className="max-w-4xl mx-auto bg-background/10 p-8 rounded-lg mb-12">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                     <div className="text-left">
                         <p className="text-sm uppercase tracking-wider mb-2">SOUTH AFRICA, 2024</p>
