@@ -12,6 +12,7 @@ import { PricingTable } from '@/components/PricingTable';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Quote } from 'lucide-react';
 import { EngagementPopup } from '@/components/EngagementPopup';
+import Image from 'next/image';
 
 export async function generateMetadata({
   params,
@@ -61,8 +62,8 @@ export default function SectorPage({ params }: { params: { sector: string } }) {
         <SectorPageHeader />
         <main className="flex-1 pt-16">
           {/* Hero Section */}
-          <section className="bg-gradient-to-b from-background to-secondary">
-            <div className="container mx-auto px-4 py-20 text-center lg:py-32">
+          <section className="relative bg-gradient-to-b from-background to-secondary overflow-hidden">
+            <div className="container mx-auto px-4 py-20 text-center lg:py-32 relative z-10">
               <h1 className="font-headline text-4xl font-bold tracking-tighter md:text-5xl lg:text-6xl mb-4">
                 {sector.heroTitle}
               </h1>
@@ -73,6 +74,13 @@ export default function SectorPage({ params }: { params: { sector: string } }) {
                 <Link href={ctaUrl}>Start 7-Day Free Trial</Link>
               </Button>
             </div>
+            <Image 
+              src={sector.heroImage}
+              alt={`${sector.name} hero image`}
+              fill
+              className="object-cover opacity-10"
+              data-ai-hint={sector.dataAiHint}
+            />
           </section>
 
           {/* Features Section */}

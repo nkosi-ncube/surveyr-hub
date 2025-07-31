@@ -39,6 +39,8 @@ export interface Sector {
   heroTitle: string;
   heroDescription: string;
   features: Feature[];
+  heroImage: string;
+  dataAiHint: string;
 }
 
 export const sectors: Sector[] = [
@@ -67,6 +69,8 @@ export const sectors: Sector[] = [
         description: 'Effortlessly organize and remind your congregation about services and events.',
       },
     ],
+    heroImage: 'https://placehold.co/1200x400.png',
+    dataAiHint: 'church interior',
   },
   {
     name: 'Event Companies',
@@ -93,6 +97,8 @@ export const sectors: Sector[] = [
         description: 'Collect valuable insights on speakers and sessions as they happen.',
       },
     ],
+    heroImage: 'https://placehold.co/1200x400.png',
+    dataAiHint: 'concert crowd',
   },
   {
     name: 'Small Businesses',
@@ -119,6 +125,8 @@ export const sectors: Sector[] = [
         description: 'Simplify booking and reduce no-shows with automated reminders.',
       },
     ],
+    heroImage: 'https://placehold.co/1200x400.png',
+    dataAiHint: 'small cafe',
   },
   {
     name: 'Healthcare',
@@ -145,6 +153,8 @@ export const sectors: Sector[] = [
         description: 'Send timely reminders for medication, appointments, and check-ups.',
       },
     ],
+    heroImage: 'https://placehold.co/1200x400.png',
+    dataAiHint: 'doctor patient',
   },
   {
     name: 'Schools',
@@ -171,6 +181,8 @@ export const sectors: Sector[] = [
         description: 'Instantly notify all parents and staff in case of emergencies or closures.',
       },
     ],
+    heroImage: 'https://placehold.co/1200x400.png',
+    dataAiHint: 'classroom students',
   },
   {
     name: 'Retail',
@@ -197,5 +209,7 @@ export const sectors: Sector[] = [
         description: 'Automatically notify customers when their desired items are available again.',
       },
     ],
+    heroImage: 'https://placehold.co/1200x400.png',
+    dataAiHint: 'clothing store',
   },
 ];
