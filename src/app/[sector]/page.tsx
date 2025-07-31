@@ -78,7 +78,7 @@ export default function SectorPage({ params }: { params: { sector: string } }) {
               src={sector.heroImage}
               alt={`${sector.name} hero image`}
               fill
-              className="object-cover opacity-10"
+              className="object-cover opacity-20"
               data-ai-hint={sector.dataAiHint}
             />
           </section>

@@ -137,7 +137,7 @@ export default function Home() {
             <div className="flex h-20 items-center justify-between">
                 <Link href="/" aria-label="Back to homepage">
                     <div className="flex items-center gap-2">
-                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={40} height={40} />
+                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={40} height={40} className="h-10 w-auto"/>
                     </div>
                 </Link>
                 <nav className="hidden md:flex items-center gap-8 text-base font-medium">
@@ -151,7 +151,7 @@ export default function Home() {
                     <Button variant="ghost" asChild>
                         <Link href="/login">Sign In</Link>
                     </Button>
-                    <Button asChild>
+                    <Button asChild size="lg">
                         <Link href="/signup">Try for free</Link>
                     </Button>
                 </div>
@@ -163,7 +163,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="text-center py-10 container mx-auto w-full relative">
             <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div className="text-left">
+                <div className="text-left px-4">
                     <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 font-headline text-foreground leading-tight">
                         Supercharge your conversations with <span className="text-gradient">Surveyr</span>
                     </h1>
