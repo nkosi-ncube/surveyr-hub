@@ -97,7 +97,7 @@ export const sectors: Sector[] = [
         description: 'Collect valuable insights on speakers and sessions as they happen.',
       },
     ],
-    heroImage: 'https://placehold.co/1200x400.png',
+    heroImage: 'https://ik.imagekit.io/qamfbdbzl/Concert%20Vibes%20with%20Digital%20Moments.png',
     dataAiHint: 'concert crowd',
   },
   {
@@ -125,7 +125,7 @@ export const sectors: Sector[] = [
         description: 'Simplify booking and reduce no-shows with automated reminders.',
       },
     ],
-    heroImage: 'https://placehold.co/1200x400.png',
+    heroImage: 'https://ik.imagekit.io/qamfbdbzl/ChatGPT%20Image%20Jul%2031,%202025,%2006_45_17%20AM.png',
     dataAiHint: 'small cafe',
   },
   {
