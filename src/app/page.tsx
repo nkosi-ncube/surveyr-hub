@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Image from 'next/image';
 import { Check, MessageCircle, BarChart, FileText, Bot, Users, PieChart, Headphones, ChevronDown } from 'lucide-react';
-import { HeroIllustration } from '@/components/HeroIllustration';
 
 const features = [
     {
@@ -172,8 +171,15 @@ export default function Home() {
                         </Link>
                     </Button>
                 </div>
-                <div className="flex items-center justify-center -mr-16">
-                  <HeroIllustration />
+                <div className="flex items-center justify-center">
+                   <Image 
+                        src="https://ik.imagekit.io/qamfbdbzl/ChatGPT%20Image%20Jul%2031,%202025,%2006_17_30%20AM.png"
+                        alt="Surveyr Platform Illustration"
+                        width={600}
+                        height={500}
+                        className="rounded-lg shadow-2xl"
+                        priority
+                   />
                 </div>
             </div>
             <Button size="icon" className="rounded-full h-16 w-16 absolute bottom-8 right-8 shadow-lg">
