@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Image from 'next/image';
 import { Check, MessageCircle, BarChart, FileText, Bot, Users, PieChart } from 'lucide-react';
+import { HeroIllustration } from '@/components/HeroIllustration';
 
 const features = [
     {
@@ -131,10 +132,7 @@ export default function Home() {
             <div className="flex h-16 items-center justify-between">
                 <Link href="/" aria-label="Back to homepage">
                     <div className="flex items-center gap-2">
-                        <svg width="32" height="32" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="text-primary">
-                            <path d="M50 0C22.3857 0 0 22.3857 0 50C0 77.6143 22.3857 100 50 100C77.6143 100 100 77.6143 100 50C100 22.3857 77.6143 0 50 0ZM50 87.5C29.325 87.5 12.5 70.675 12.5 50C12.5 29.325 29.325 12.5 50 12.5C70.675 12.5 87.5 29.325 87.5 50C87.5 70.675 70.675 87.5 50 87.5Z" opacity="0.5" />
-                            <path d="M50 25C36.2125 25 25 36.2125 25 50C25 63.7875 36.2125 75 50 75C63.7875 75 75 63.7875 75 50C75 36.2125 63.7875 25 50 25Z" />
-                        </svg>
+                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={32} height={32} />
                         <span className="font-bold text-xl text-foreground">Surveyr</span>
                     </div>
                 </Link>
@@ -175,8 +173,8 @@ export default function Home() {
                         </Button>
                     </div>
                 </div>
-                <div>
-                  <Image src="https://placehold.co/600x400.png" alt="Surveyr platform screenshot" width={600} height={400} className="rounded-lg shadow-2xl" data-ai-hint="hero illustration" />
+                <div className="flex items-center justify-center">
+                  <HeroIllustration />
                 </div>
             </div>
         </section>
