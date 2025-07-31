@@ -159,7 +159,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center pt-20">
+      <main className="flex-1 flex flex-col items-center pt-20" style={{paddingTop: 'calc(5rem + 5px)'}}>
         {/* Hero Section */}
         <section className="text-center py-10 container mx-auto w-full relative">
             <div className="grid md:grid-cols-2 gap-8 items-center">
