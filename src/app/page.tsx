@@ -96,7 +96,7 @@ export default function Home() {
             <div className="flex h-20 items-center justify-between">
                 <Link href="/" aria-label="Back to homepage">
                     <div className="flex items-center gap-2">
-                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={40} height={40} />
+                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={50} height={50} />
                     </div>
                 </Link>
                 <nav className="hidden md:flex items-center gap-8 text-base font-medium">
@@ -132,7 +132,7 @@ export default function Home() {
               </div>
               <div className="flex items-center justify-center">
                 <Image
-                  src="https://ik.imagekit.io/qamfbdbzl/hero-illustration-new.png"
+                  src="https://ik.imagekit.io/qamfbdbzl/ChatGPT%20Image%20Jul%2031,%202025,%2006_17_30%20AM.png"
                   alt="Surveyr Platform Illustration"
                   width={500}
                   height={500}
