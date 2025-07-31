@@ -7,6 +7,12 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Image from 'next/image';
 import { Check, MessageCircle, BarChart, FileText, Bot, Users, PieChart, Headphones, ChevronDown } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 const features = [
     {
@@ -131,7 +137,7 @@ export default function Home() {
             <div className="flex h-20 items-center justify-between">
                 <Link href="/" aria-label="Back to homepage">
                     <div className="flex items-center gap-2">
-                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={64} height={64} />
+                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={48} height={48} />
                     </div>
                 </Link>
                 <nav className="hidden md:flex items-center gap-8 text-base font-medium">
@@ -155,7 +161,7 @@ export default function Home() {
 
       <main className="flex-1 flex flex-col items-center pt-20">
         {/* Hero Section */}
-        <section className="text-center py-10 lg:py-16 container mx-auto w-full relative">
+        <section className="text-center py-10 container mx-auto w-full relative">
             <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div className="text-left">
                     <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 font-headline text-foreground leading-tight">
@@ -164,12 +170,21 @@ export default function Home() {
                     <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-8">
                         A WhatsApp driven platform for engaging customer chats, <span className="highlight">capturing leads</span>, <span className="highlight">collecting valuable feedback</span> and boosting live events.
                     </p>
-                    <Button asChild size="lg">
-                        <Link href="#use-cases" className="flex items-center gap-2">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button size="lg" className="flex items-center gap-2">
                             Select your sector
                             <ChevronDown className="h-5 w-5" />
-                        </Link>
-                    </Button>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        {sectors.map(sector => (
+                          <DropdownMenuItem key={sector.slug} asChild>
+                            <Link href={`/${sector.slug}`}>{sector.name}</Link>
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
                 <div className="flex items-center justify-center">
                    <Image 
