@@ -137,7 +137,7 @@ export default function Home() {
             <div className="flex h-20 items-center justify-between">
                 <Link href="/" aria-label="Back to homepage">
                     <div className="flex items-center gap-2">
-                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={48} height={48} />
+                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={40} height={40} />
                     </div>
                 </Link>
                 <nav className="hidden md:flex items-center gap-8 text-base font-medium">
