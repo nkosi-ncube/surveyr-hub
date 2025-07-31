@@ -11,7 +11,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Check, BarChart, FileText, BotMessageSquare, Users, TrendingUp, DraftingCompass, MessageSquare, Megaphone, Gauge, FileSignature, Inbox, CheckCircle, ArrowRight, ChevronDown } from 'lucide-react';
+import { SectorDropdown } from '@/components/SectorDropdown';
+import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox, ArrowRight } from 'lucide-react';
 
 const testimonials = [
   {
@@ -96,7 +97,7 @@ export default function Home() {
             <div className="flex h-20 items-center justify-between">
                 <Link href="/" aria-label="Back to homepage">
                     <div className="flex items-center gap-2">
-                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={50} height={50} />
+                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={130} height={32} />
                     </div>
                 </Link>
                 <nav className="hidden md:flex items-center gap-8 text-base font-medium">
@@ -119,7 +120,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-background pt-8 pb-20 md:pt-12 md:pb-28">
+        <section className="relative bg-background pt-12 pb-20 md:pt-16 md:pb-28">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="text-left">
@@ -130,15 +131,10 @@ export default function Home() {
                   A WhatsApp driven platform for engaging customer chats, <span className="highlight">capturing leads</span>, <span className="highlight">collecting valuable feedback</span> and <span className="highlight">boosting live events</span>.
                 </p>
                 <div className="mt-8">
-                  <Button asChild size="lg" className="px-8 py-7 text-lg">
-                    <Link href="#use-cases">
-                      Select your sector
-                      <ChevronDown className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
+                  <SectorDropdown />
                 </div>
               </div>
-              <div className="flex items-center justify-center">
+              <div className="hidden md:flex items-center justify-center">
                 <Image
                   src="https://ik.imagekit.io/qamfbdbzl/ChatGPT%20Image%20Jul%2031,%202025,%2006_17_30%20AM.png"
                   alt="Surveyr Platform Illustration"
@@ -152,7 +148,7 @@ export default function Home() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-12 bg-background">
+        <section className="py-12 bg-secondary">
             <div className="container mx-auto px-4 text-center">
                 <h3 className="text-muted-foreground font-medium mb-6">Trusted by these organisations</h3>
                 <div className="flex justify-center items-center gap-12 flex-wrap">
@@ -166,13 +162,13 @@ export default function Home() {
         </section>
 
         {/* Testimonials Section */}
-        <section id="testimonials" className="py-20 lg:py-28 bg-secondary">
+        <section id="testimonials" className="py-20 lg:py-28 bg-background">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Testimonials</h2>
             <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">What our clients are saying about us</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-background text-left p-6 flex flex-col">
+                <Card key={index} className="bg-secondary text-left p-6 flex flex-col">
                     <CardContent className="flex-grow p-0">
                         <p className="text-muted-foreground mb-6">"{testimonial.quote}"</p>
                     </CardContent>
