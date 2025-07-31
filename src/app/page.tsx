@@ -172,7 +172,7 @@ export default function Home() {
                     </p>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button size="lg" className="flex items-center gap-2">
+                        <Button size="lg" className="flex items-center gap-2 text-lg px-8 py-7">
                             Select your sector
                             <ChevronDown className="h-5 w-5" />
                         </Button>
