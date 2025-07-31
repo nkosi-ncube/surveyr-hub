@@ -11,7 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Check, BarChart, FileText, BotMessageSquare, Users, TrendingUp, DraftingCompass, MessageSquare, Megaphone, Gauge, FileSignature, Inbox, CheckCircle, ArrowRight } from 'lucide-react';
+import { Check, BarChart, FileText, BotMessageSquare, Users, TrendingUp, DraftingCompass, MessageSquare, Megaphone, Gauge, FileSignature, Inbox, CheckCircle, ArrowRight, ChevronDown } from 'lucide-react';
 
 const testimonials = [
   {
@@ -129,6 +129,14 @@ export default function Home() {
                 <p className="text-lg md:text-xl text-muted-foreground max-w-xl mt-6">
                   A WhatsApp driven platform for engaging customer chats, <span className="highlight">capturing leads</span>, <span className="highlight">collecting valuable feedback</span> and <span className="highlight">boosting live events</span>.
                 </p>
+                <div className="mt-8">
+                  <Button asChild size="lg" className="px-8 py-7 text-lg">
+                    <Link href="#use-cases">
+                      Select your sector
+                      <ChevronDown className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                </div>
               </div>
               <div className="flex items-center justify-center">
                 <Image
