@@ -40,7 +40,7 @@ export default function Home() {
       </header>
 
       <main className="flex-1 flex flex-col items-center pt-20">
-        <section className="text-center py-10 container mx-auto w-full relative px-4">
+        <section className="text-center pt-5 pb-10 container mx-auto w-full relative px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div className="text-left">
                     <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 font-headline text-foreground leading-tight">
@@ -72,6 +72,7 @@ export default function Home() {
                         width={600}
                         height={500}
                         priority
+                        className="rounded-lg"
                    />
                 </div>
             </div>
