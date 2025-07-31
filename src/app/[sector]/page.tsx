@@ -55,6 +55,7 @@ export default function SectorPage({ params }: { params: { sector: string } }) {
   }
 
   const ctaUrl = `/signup?src=${sector.slug}&utm_source=sectorpage&utm_medium=cta&utm_campaign=${sector.slug}`;
+  const imageClassName = `object-cover opacity-30 ${sector.slug === 'churches' ? 'object-center' : 'object-top'}`;
 
   return (
     <>
@@ -62,8 +63,8 @@ export default function SectorPage({ params }: { params: { sector: string } }) {
         <SectorPageHeader />
         <main className="flex-1 pt-16">
           {/* Hero Section */}
-          <section className="relative bg-gradient-to-b from-background to-secondary overflow-hidden">
-            <div className="container mx-auto px-4 py-20 text-center lg:py-32 relative z-10">
+          <section className="relative bg-gradient-to-b from-background to-secondary overflow-hidden h-[400px] flex items-center justify-center">
+            <div className="container mx-auto px-4 text-center relative z-10">
               <h1 className="font-headline text-4xl font-bold tracking-tighter md:text-5xl lg:text-6xl mb-4">
                 {sector.heroTitle}
               </h1>
@@ -78,7 +79,8 @@ export default function SectorPage({ params }: { params: { sector: string } }) {
               src={sector.heroImage}
               alt={`${sector.name} hero image`}
               fill
-              className="object-cover opacity-20"
+              priority
+              className={imageClassName}
               data-ai-hint={sector.dataAiHint}
             />
           </section>
