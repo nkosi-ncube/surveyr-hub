@@ -69,7 +69,7 @@ export const sectors: Sector[] = [
         description: 'Effortlessly organize and remind your congregation about services and events.',
       },
     ],
-    heroImage: 'https://placehold.co/1200x400.png',
+    heroImage: 'https://ik.imagekit.io/qamfbdbzl/ChatGPT%20Image%20Jul%2031,%202025,%2006_33_56%20AM.png',
     dataAiHint: 'church interior',
   },
   {
