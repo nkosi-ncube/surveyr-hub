@@ -11,6 +11,7 @@ import { TestimonialGenerator } from '@/components/TestimonialGenerator';
 import { PricingTable } from '@/components/PricingTable';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Quote } from 'lucide-react';
+import { EngagementPopup } from '@/components/EngagementPopup';
 
 export async function generateMetadata({
   params,
@@ -55,55 +56,58 @@ export default function SectorPage({ params }: { params: { sector: string } }) {
   const ctaUrl = `/signup?src=${sector.slug}&utm_source=sectorpage&utm_medium=cta&utm_campaign=${sector.slug}`;
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground animate-in fade-in duration-500">
-      <SectorPageHeader />
-      <main className="flex-1 pt-16">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-b from-background to-secondary">
-          <div className="container mx-auto px-4 py-20 text-center lg:py-32">
-            <h1 className="font-headline text-4xl font-bold tracking-tighter md:text-5xl lg:text-6xl mb-4">
-              {sector.heroTitle}
-            </h1>
-            <p className="mx-auto mb-8 max-w-3xl text-lg text-muted-foreground md:text-xl">
-              {sector.heroDescription}
-            </p>
-            <Button asChild size="lg" className="px-8 py-7 text-lg">
-              <Link href={ctaUrl}>Start 7-Day Free Trial</Link>
-            </Button>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-              {sector.features.map((feature) => (
-                <div key={feature.title} className="text-center">
-                  <div className="mb-4 flex justify-center">
-                    <div className="rounded-full bg-primary/10 p-4">
-                      <feature.Icon className="h-8 w-8 text-primary" />
-                    </div>
-                  </div>
-                  <h3 className="font-headline text-xl font-bold mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </div>
-              ))}
+    <>
+      <div className="flex min-h-screen flex-col bg-background text-foreground animate-in fade-in duration-500">
+        <SectorPageHeader />
+        <main className="flex-1 pt-16">
+          {/* Hero Section */}
+          <section className="bg-gradient-to-b from-background to-secondary">
+            <div className="container mx-auto px-4 py-20 text-center lg:py-32">
+              <h1 className="font-headline text-4xl font-bold tracking-tighter md:text-5xl lg:text-6xl mb-4">
+                {sector.heroTitle}
+              </h1>
+              <p className="mx-auto mb-8 max-w-3xl text-lg text-muted-foreground md:text-xl">
+                {sector.heroDescription}
+              </p>
+              <Button asChild size="lg" className="px-8 py-7 text-lg">
+                <Link href={ctaUrl}>Start 7-Day Free Trial</Link>
+              </Button>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Testimonial Section */}
-        <Suspense fallback={<TestimonialSkeleton />}>
-          <TestimonialGenerator sector={sector.name} />
-        </Suspense>
+          {/* Features Section */}
+          <section className="py-16 md:py-24">
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                {sector.features.map((feature) => (
+                  <div key={feature.title} className="text-center">
+                    <div className="mb-4 flex justify-center">
+                      <div className="rounded-full bg-primary/10 p-4">
+                        <feature.Icon className="h-8 w-8 text-primary" />
+                      </div>
+                    </div>
+                    <h3 className="font-headline text-xl font-bold mb-2">
+                      {feature.title}
+                    </h3>
+                    <p className="text-muted-foreground">{feature.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
 
-        {/* Pricing Section */}
-        <PricingTable sectorName={sector.name} ctaUrl={ctaUrl} />
-      </main>
-      <SectorPageFooter />
-    </div>
+          {/* Testimonial Section */}
+          <Suspense fallback={<TestimonialSkeleton />}>
+            <TestimonialGenerator sector={sector.name} />
+          </Suspense>
+
+          {/* Pricing Section */}
+          <PricingTable sectorName={sector.name} ctaUrl={ctaUrl} />
+        </main>
+        <SectorPageFooter />
+      </div>
+      <EngagementPopup />
+    </>
   );
 }
 
