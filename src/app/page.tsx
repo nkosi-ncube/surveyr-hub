@@ -12,7 +12,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { EngagementPopup } from '@/components/EngagementPopup';
-import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox, ArrowRight } from 'lucide-react';
+import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox } from 'lucide-react';
 
 const testimonials = [
   {
@@ -120,27 +120,31 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-background pt-16 pb-20 md:pt-24 md:pb-32 text-center">
+        <section className="relative bg-background pt-16 pb-20 md:pt-24 md:pb-32">
           <div className="container mx-auto px-4">
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-foreground !leading-tight max-w-4xl mx-auto">
-              Unlock Deeper Insights with Conversational Surveys
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mt-6">
-              Surveyr leverages WhatsApp to conduct powerful, quantitative research and gather authentic feedback. Engage your audience where they are most responsive.
-            </p>
-            <div className="mt-8">
-                <EngagementPopup />
-            </div>
-            <div className="mt-16 md:mt-24">
-                 <Image
-                  src="https://ik.imagekit.io/qamfbdbzl/ChatGPT%20Image%20Jul%2031,%202025,%2006_17_30%20AM.png"
-                  alt="Surveyr Platform Illustration"
-                  width={800}
-                  height={500}
-                  priority
-                  className="mx-auto"
-                />
-            </div>
+             <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="text-center md:text-left">
+                     <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-foreground !leading-tight">
+                        Unlock Deeper Insights with Conversational Surveys
+                     </h1>
+                     <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto md:mx-0 mt-6">
+                        Surveyr leverages WhatsApp to conduct powerful, quantitative research and gather authentic feedback. Engage your audience where they are most responsive.
+                     </p>
+                     <div className="mt-8">
+                        <EngagementPopup />
+                     </div>
+                </div>
+                <div className="relative">
+                     <Image
+                        src="https://ik.imagekit.io/qamfbdbzl/ChatGPT%20Image%20Jul%2031,%202025,%2006_17_30%20AM.png"
+                        alt="Surveyr Platform Illustration"
+                        width={600}
+                        height={500}
+                        priority
+                        className="mx-auto animate-float"
+                     />
+                </div>
+             </div>
           </div>
         </section>
 
