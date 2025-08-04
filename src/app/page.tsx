@@ -11,8 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { EngagementPopup } from '@/components/EngagementPopup';
-import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox } from 'lucide-react';
+import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox, ArrowDown } from 'lucide-react';
 
 const testimonials = [
   {
@@ -120,7 +119,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-background pt-8 pb-20 md:pb-32">
+        <section className="relative bg-background pt-2">
           <div className="container mx-auto px-4">
              <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div className="text-center md:text-left">
@@ -131,7 +130,12 @@ export default function Home() {
                         A WhatsApp driven platform for engaging customer chats, capturing leads, collecting valuable feedback and boosting live events.
                      </p>
                      <div className="mt-8">
-                        <EngagementPopup />
+                        <Button asChild size="lg" className="px-8 py-7 text-lg">
+                          <Link href="#use-cases">
+                            Select Your Sector
+                            <ArrowDown className="ml-2 h-5 w-5" />
+                          </Link>
+                        </Button>
                      </div>
                 </div>
                 <div className="relative">

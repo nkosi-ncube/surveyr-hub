@@ -11,7 +11,6 @@ import { TestimonialGenerator } from '@/components/TestimonialGenerator';
 import { PricingTable } from '@/components/PricingTable';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Quote } from 'lucide-react';
-import { EngagementPopup } from '@/components/EngagementPopup';
 import Image from 'next/image';
 
 export async function generateMetadata({
@@ -116,7 +115,6 @@ export default function SectorPage({ params }: { params: { sector: string } }) {
         </main>
         <SectorPageFooter />
       </div>
-      <EngagementPopup />
     </>
   );
 }
