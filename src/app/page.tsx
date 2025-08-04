@@ -1,3 +1,7 @@
+
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -12,6 +16,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox, ArrowDown } from 'lucide-react';
+import { EngagementPopup } from '@/components/EngagementPopup';
 
 const testimonials = [
   {
@@ -89,6 +94,16 @@ const faqItems = [
 
 
 export default function Home() {
+  const [popupOpen, setPopupOpen] = useState(false);
+
+  const handlePopupSelect = () => {
+    setPopupOpen(false);
+    const useCasesSection = document.getElementById('use-cases');
+    if (useCasesSection) {
+      useCasesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground animate-in fade-in duration-500">
        <header className="sticky top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
@@ -130,11 +145,13 @@ export default function Home() {
                         A WhatsApp driven platform for engaging customer chats, capturing leads, collecting valuable feedback and boosting live events.
                      </p>
                      <div className="mt-8">
-                        <Button asChild size="lg" className="px-8 py-7 text-lg">
-                          <Link href="#use-cases">
-                            Select Your Sector
-                            <ArrowDown className="ml-2 h-5 w-5" />
-                          </Link>
+                        <Button
+                          size="lg"
+                          className="px-8 py-7 text-lg"
+                          onClick={() => setPopupOpen(true)}
+                        >
+                          Select Your Sector
+                          <ArrowDown className="ml-2 h-5 w-5" />
                         </Button>
                      </div>
                 </div>
@@ -277,6 +294,11 @@ export default function Home() {
 
       </main>
       <SectorPageFooter />
+      <EngagementPopup
+        open={popupOpen}
+        onOpenChange={setPopupOpen}
+        onSelect={handlePopupSelect}
+      />
     </div>
   );
 }
