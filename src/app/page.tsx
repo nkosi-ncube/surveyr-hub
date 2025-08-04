@@ -11,32 +11,30 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { SectorDropdown } from '@/components/SectorDropdown';
+import { EngagementPopup } from '@/components/EngagementPopup';
 import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox, ArrowRight } from 'lucide-react';
 
-
-//hhhh
 const testimonials = [
   {
     name: 'Dr. Thando Molefe',
-    title: 'Lead Pastor',
+    title: 'Lead Pastor, GraceHill Church',
     avatar: 'https://placehold.co/100x100.png',
     dataAiHint: 'woman portrait',
-    quote: 'As a church, Surveyr allows us to meet our congregation where they are. Since we onboarded Surveyr, it has helped us increase our engagement by over 300%!',
+    quote: 'Surveyr has revolutionized how we connect with our congregation. The ability to send daily devotionals and gather prayer requests on a platform everyone uses has deepened our community bond significantly.',
   },
   {
-    name: 'Rev. Unundo Mateo',
-    title: 'Event Coordinator',
+    name: 'Jabu Mthembu',
+    title: 'Event Coordinator, Spark Live',
     avatar: 'https://placehold.co/100x100.png',
     dataAiHint: 'man portrait',
-    quote: 'It has been a pleasure to work with Surveyr. The platform is robust, very reliable and easily handles surveys with over fifty thousand people.',
+    quote: 'The live polling and Q&A features are game-changers for audience engagement. We get real-time feedback that helps us make every event better than the last. The platform is incredibly reliable.',
   },
   {
-    name: 'Mark Lieshere',
-    title: 'Business Owner',
+    name: 'Aisha Patel',
+    title: 'Owner, The Daily Grind Cafe',
     avatar: 'https://placehold.co/100x100.png',
-    dataAiHint: 'man portrait',
-    quote: "Surveyr is our go-to tool for managing company events. It has been a game-changer for our business. Highly recommended.",
+    dataAiHint: 'woman portrait',
+    quote: "As a small business, customer relationships are everything. Surveyr helps us offer instant support and send targeted promotions that our customers actually see and appreciate. It's an invaluable tool.",
   },
 ];
 
@@ -82,10 +80,10 @@ const pricingTiers = [
 ];
 
 const faqItems = [
-    { question: "What is Surveyr?", answer: "Surveyr is a WhatsApp-driven platform for engaging customer chats, capturing leads, collecting valuable feedback, and boosting live events." },
-    { question: "How can Surveyr help my business or organization?", answer: "Surveyr helps you connect with your audience on a platform they use daily, increasing engagement, gathering insights, and improving communication." },
-    { question: "Can I integrate Surveyr with other business tools?", answer: "Yes, our Enterprise plan offers custom integrations with your existing business tools and systems." },
-    { question: "What types of surveys can I create with Surveyr?", answer: "You can create a wide variety of surveys, from simple polls and quizzes to detailed feedback forms and market research questionnaires." },
+    { question: "What is Surveyr?", answer: "Surveyr is a WhatsApp-driven platform for engaging customer chats, capturing leads, collecting valuable feedback, and boosting live events. We specialize in research and quantitative surveys." },
+    { question: "How can Surveyr help my business or organization?", answer: "Surveyr helps you connect with your audience on a platform they use daily, increasing engagement, gathering insights, and improving communication for research and feedback." },
+    { question: "Can I integrate Surveyr with other business tools?", answer: "Yes, our Enterprise plan offers custom integrations with your existing business tools and systems to streamline your workflow." },
+    { question: "What types of surveys can I create with Surveyr?", answer: "You can create a wide variety of surveys, from simple polls and quizzes for engagement to detailed feedback forms and quantitative market research questionnaires." },
     { question: "How secure is the data we collect through Surveyr?", answer: "We take data security very seriously. All data is encrypted and stored securely, and we comply with all relevant data protection regulations." },
     { question: "What support options are available if I need help using Surveyr?", answer: "We offer email support for all our users. Our Pro and Enterprise plans include priority support and a dedicated success manager." },
 ];
@@ -93,13 +91,13 @@ const faqItems = [
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
-       <header className="sticky top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/10">
+    <div className="flex min-h-screen flex-col bg-background text-foreground animate-in fade-in duration-500">
+       <header className="sticky top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex h-20 items-center justify-between">
                 <Link href="/" aria-label="Back to homepage">
                     <div className="flex items-center gap-2">
-                        <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={130} height={32} />
+                         <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={130} height={32} />
                     </div>
                 </Link>
                 <nav className="hidden md:flex items-center gap-8 text-base font-medium">
@@ -113,7 +111,7 @@ export default function Home() {
                         <Link href="/login">Sign In</Link>
                     </Button>
                     <Button asChild>
-                        <Link href="/signup">Try for free</Link>
+                        <Link href="/signup">Start Free Trial</Link>
                     </Button>
                 </div>
             </div>
@@ -122,29 +120,26 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-background pt-12 pb-20 md:pt-16 md:pb-28">
+        <section className="relative bg-background pt-16 pb-20 md:pt-24 md:pb-32 text-center">
           <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="text-left">
-                <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-foreground !leading-tight">
-                  Supercharge your conversations with <span className="text-white bg-primary px-2 rounded-md">Surveyr</span>
-                </h1>
-                <p className="text-lg md:text-xl text-muted-foreground max-w-xl mt-6">
-                  A WhatsApp driven platform for engaging customer chats, <span className="highlight">capturing leads</span>, <span className="highlight">collecting valuable feedback</span> and <span className="highlight">boosting live events</span>.
-                </p>
-                <div className="mt-8">
-                  <SectorDropdown />
-                </div>
-              </div>
-              <div className="hidden md:flex items-center justify-center">
-                <Image
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-foreground !leading-tight max-w-4xl mx-auto">
+              Unlock Deeper Insights with Conversational Surveys
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mt-6">
+              Surveyr leverages WhatsApp to conduct powerful, quantitative research and gather authentic feedback. Engage your audience where they are most responsive.
+            </p>
+            <div className="mt-8">
+                <EngagementPopup />
+            </div>
+            <div className="mt-16 md:mt-24">
+                 <Image
                   src="https://ik.imagekit.io/qamfbdbzl/ChatGPT%20Image%20Jul%2031,%202025,%2006_17_30%20AM.png"
                   alt="Surveyr Platform Illustration"
-                  width={500}
+                  width={800}
                   height={500}
                   priority
+                  className="mx-auto"
                 />
-              </div>
             </div>
           </div>
         </section>
@@ -152,7 +147,7 @@ export default function Home() {
         {/* Trusted By Section */}
         <section className="py-12 bg-secondary">
             <div className="container mx-auto px-4 text-center">
-                <h3 className="text-muted-foreground font-medium mb-6">Trusted by these organisations</h3>
+                <h3 className="text-muted-foreground font-medium mb-6">Trusted by organizations focused on impact</h3>
                 <div className="flex justify-center items-center gap-12 flex-wrap">
                     <Image src="https://placehold.co/150x50.png" alt="Client Logo 1" width={150} height={50} data-ai-hint="company logo" className="opacity-60" />
                     <Image src="https://placehold.co/150x50.png" alt="Client Logo 2" width={150} height={50} data-ai-hint="company logo" className="opacity-60" />
@@ -166,13 +161,13 @@ export default function Home() {
         {/* Testimonials Section */}
         <section id="testimonials" className="py-20 lg:py-28 bg-background">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Testimonials</h2>
-            <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">What our clients are saying about us</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Leaders Choose Surveyr</h2>
+            <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">Hear what our clients have to say about their success.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-secondary text-left p-6 flex flex-col">
+                <Card key={index} className="bg-card text-left p-6 flex flex-col border shadow-none rounded-xl">
                     <CardContent className="flex-grow p-0">
-                        <p className="text-muted-foreground mb-6">"{testimonial.quote}"</p>
+                        <p className="text-muted-foreground mb-6 text-base">"{testimonial.quote}"</p>
                     </CardContent>
                     <div className="flex items-center gap-4 mt-auto">
                         <Image src={testimonial.avatar} alt={testimonial.name} width={48} height={48} className="rounded-full" data-ai-hint={testimonial.dataAiHint} />
@@ -190,18 +185,18 @@ export default function Home() {
         {/* Features Section */}
         <section id="features" className="py-20 lg:py-28 bg-secondary">
             <div className="container mx-auto px-4 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Features</h2>
-                <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">Surveyr provides you with a variety of features to engage with your audience.</p>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything You Need for Effective Research</h2>
+                <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">Surveyr provides a comprehensive suite of features to design, distribute, and analyze your surveys.</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
                     {features.map((feature, index) => (
-                        <Card key={index} className="p-6 bg-background border-border/50">
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className="p-3 rounded-full bg-primary/10">
+                        <Card key={index} className="p-6 bg-background border-border/50 rounded-xl shadow-sm">
+                            <div className="flex items-start gap-4 mb-4">
+                                <div className="p-3 rounded-lg bg-primary/10">
                                     <feature.Icon className="w-6 h-6 text-primary" />
                                 </div>
-                                <h3 className="text-xl font-semibold">{feature.title}</h3>
+                                <h3 className="text-xl font-semibold pt-2">{feature.title}</h3>
                             </div>
-                            <p className="text-muted-foreground">{feature.description}</p>
+                            <p className="text-muted-foreground pl-16">{feature.description}</p>
                         </Card>
                     ))}
                 </div>
@@ -211,15 +206,15 @@ export default function Home() {
         {/* Pricing Section */}
         <section id="pricing" className="py-20 lg:py-28 bg-background">
             <div className="container mx-auto px-4 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Pricing</h2>
-                <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">A day left in our discount bonanza. Grab it now.</p>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+                <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">Choose the plan that fits your needs. No hidden fees.</p>
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
                     {pricingTiers.map((tier, index) => (
-                        <Card key={index} className={`flex flex-col text-left ${tier.popular ? 'border-primary shadow-2xl relative -translate-y-4' : 'border-border/50'}`}>
-                            {tier.popular && <div className="absolute top-0 right-4 -translate-y-1/2 bg-primary text-primary-foreground px-3 py-1 text-sm font-semibold rounded-full">Popular</div>}
+                        <Card key={index} className={`flex flex-col text-left rounded-xl shadow-sm ${tier.popular ? 'border-2 border-primary relative' : 'border'}`}>
+                            {tier.popular && <div className="absolute top-0 right-4 -translate-y-1/2 bg-primary text-primary-foreground px-3 py-1 text-sm font-semibold rounded-full">Most Popular</div>}
                             <CardHeader>
                                 <h3 className="text-xl font-semibold">{tier.name}</h3>
-                                <p className="text-3xl font-bold">{tier.price}</p>
+                                <p className="text-3xl font-bold pt-2">{tier.price}</p>
                             </CardHeader>
                             <CardContent className="flex-grow">
                                 <ul className="space-y-3">
@@ -232,7 +227,7 @@ export default function Home() {
                                 </ul>
                             </CardContent>
                             <div className="p-6 pt-0 mt-6">
-                                <Button className="w-full" variant={tier.buttonVariant as any}>{tier.buttonText}</Button>
+                                <Button className="w-full" variant={tier.popular ? 'default' : 'outline'}>{tier.buttonText}</Button>
                             </div>
                         </Card>
                     ))}
@@ -247,9 +242,9 @@ export default function Home() {
                 <div className="max-w-3xl mx-auto">
                     <Accordion type="single" collapsible className="w-full">
                         {faqItems.map((item, index) => (
-                             <AccordionItem key={index} value={`item-${index}`} className="bg-background rounded-lg mb-4 px-6 border-border/50">
-                                <AccordionTrigger className="text-lg font-medium hover:no-underline">{item.question}</AccordionTrigger>
-                                <AccordionContent className="text-muted-foreground pt-2">
+                             <AccordionItem key={index} value={`item-${index}`} className="bg-background rounded-xl mb-4 px-6 border">
+                                <AccordionTrigger className="text-lg font-medium hover:no-underline text-left">{item.question}</AccordionTrigger>
+                                <AccordionContent className="text-muted-foreground pt-2 text-base text-left">
                                     {item.answer}
                                 </AccordionContent>
                             </AccordionItem>
@@ -262,23 +257,8 @@ export default function Home() {
         {/* Use Cases Section */}
         <section id="use-cases" className="py-20 lg:py-28 bg-background">
             <div className="container mx-auto px-4 text-center">
-                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Use Cases</h2>
-                 <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">Discover how Surveyr is used by others on our WhatsApp platform</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                     <div className="md:col-span-2 lg:col-span-2 rounded-lg bg-primary text-primary-foreground p-8 flex flex-col justify-between text-left">
-                        <div>
-                           <p className="text-sm font-semibold mb-2 text-primary-foreground/80">TASK-A-TASK, 2024</p>
-                           <h3 className="text-2xl font-bold mb-4">Discover how Surveyr was successfully used by the SACC election observers across South Africa for the 2024 elections.</h3>
-                        </div>
-                         <Button variant="secondary" asChild>
-                             <Link href="#">Read the case study <ArrowRight className="ml-2" /></Link>
-                         </Button>
-                    </div>
-                    <div className="md:col-span-2 lg:col-span-2 rounded-lg bg-black p-8 flex items-center justify-center">
-                         <Image src="https://ik.imagekit.io/qamfbdbzl/sacc-election-logo.png" alt="SACC Election Observation" width={300} height={150} />
-                    </div>
-                </div>
-
+                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Solutions for Every Sector</h2>
+                 <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">Discover how Surveyr drives results across different industries. How can we help you today?</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {sectors.map((sector) => (
                         <SectorCard key={sector.slug} sector={sector} />

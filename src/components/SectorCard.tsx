@@ -12,10 +12,10 @@ import Link from 'next/link';
 export function SectorCard({ sector }: { sector: Sector }) {
   return (
     <Link href={`/${sector.slug}`} className="group block h-full">
-      <Card className="h-full transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1 bg-background text-foreground text-left border-border/50">
+      <Card className="h-full transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1 bg-card text-foreground text-left border rounded-xl shadow-sm">
         <CardHeader>
           <div className="mb-4">
-            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
+            <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10 text-primary">
               <sector.Icon className="h-6 w-6" />
             </div>
           </div>
@@ -25,8 +25,9 @@ export function SectorCard({ sector }: { sector: Sector }) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-            <div className="flex justify-end pt-2">
-                <ArrowRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+            <div className="flex items-center pt-4 text-sm font-medium text-primary">
+                <span>Explore {sector.name}</span>
+                <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
             </div>
         </CardContent>
       </Card>
