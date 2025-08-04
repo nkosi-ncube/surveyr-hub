@@ -120,7 +120,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-background pt-16 pb-20 md:pt-24 md:pb-32">
+        <section className="relative bg-background pt-8 pb-20 md:pb-32">
           <div className="container mx-auto px-4">
              <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div className="text-center md:text-left">
