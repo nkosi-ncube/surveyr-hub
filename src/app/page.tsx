@@ -125,10 +125,10 @@ export default function Home() {
              <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div className="text-center md:text-left">
                      <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-foreground !leading-tight">
-                        Unlock Deeper Insights with Conversational Surveys
+                        Supercharge your conversations
                      </h1>
                      <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto md:mx-0 mt-6">
-                        Surveyr leverages WhatsApp to conduct powerful, quantitative research and gather authentic feedback. Engage your audience where they are most responsive.
+                        A WhatsApp driven platform for engaging customer chats, capturing leads, collecting valuable feedback and boosting live events.
                      </p>
                      <div className="mt-8">
                         <EngagementPopup />
