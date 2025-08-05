@@ -15,8 +15,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox, ArrowDown } from 'lucide-react';
-import { SectorDropdown } from '@/components/SectorDropdown';
+import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox } from 'lucide-react';
+import { SectorSelectionPopup } from '@/components/SectorSelectionPopup';
 
 const testimonials = [
   {
@@ -94,6 +94,14 @@ const faqItems = [
 
 
 export default function Home() {
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [intent, setIntent] = useState<'research' | 'feedback' | null>(null);
+
+  const handleButtonClick = (selectedIntent: 'research' | 'feedback') => {
+    setIntent(selectedIntent);
+    setPopupOpen(true);
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground animate-in fade-in duration-500">
        <header className="sticky top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
@@ -101,7 +109,7 @@ export default function Home() {
             <div className="flex h-20 items-center justify-between">
                 <Link href="/" aria-label="Back to homepage">
                     <div className="flex items-center gap-2">
-                         <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={130} height={32} />
+                         <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={150} height={36} />
                     </div>
                 </Link>
                 <nav className="hidden md:flex items-center gap-8 text-base font-medium">
@@ -121,6 +129,12 @@ export default function Home() {
             </div>
         </div>
       </header>
+      
+      <SectorSelectionPopup 
+        isOpen={popupOpen} 
+        setIsOpen={setPopupOpen} 
+        intent={intent}
+      />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -134,8 +148,13 @@ export default function Home() {
                      <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto md:mx-0 mt-6">
                         A WhatsApp driven platform for engaging customer chats, capturing leads, collecting valuable feedback and boosting live events.
                      </p>
-                     <div className="mt-8">
-                        <SectorDropdown />
+                     <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <Button size="lg" className="px-8 py-7 text-lg" onClick={() => handleButtonClick('research')}>
+                          For Quantitative Research
+                        </Button>
+                        <Button size="lg" variant="outline" className="px-8 py-7 text-lg" onClick={() => handleButtonClick('feedback')}>
+                          For Feedback Collection
+                        </Button>
                      </div>
                 </div>
                 <div className="relative">

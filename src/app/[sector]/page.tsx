@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
@@ -46,14 +47,17 @@ export async function generateMetadata({
   };
 }
 
-export default function SectorPage({ params }: { params: { sector: string } }) {
+export default function SectorPage({ params, searchParams }: { params: { sector: string }, searchParams: { intent?: string } }) {
   const sector = sectors.find((s) => s.slug === params.sector);
 
   if (!sector) {
     notFound();
   }
 
-  const ctaUrl = `/signup?src=${sector.slug}&utm_source=sectorpage&utm_medium=cta&utm_campaign=${sector.slug}`;
+  let ctaUrl = `/signup?src=${sector.slug}&utm_source=sectorpage&utm_medium=cta&utm_campaign=${sector.slug}`;
+  if (searchParams.intent) {
+    ctaUrl += `&utm_content=${searchParams.intent}`;
+  }
   const imageClassName = `object-cover opacity-30 ${sector.slug === 'churches' ? 'object-center' : 'object-top'}`;
 
   return (

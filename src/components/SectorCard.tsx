@@ -1,3 +1,4 @@
+
 import type { Sector } from '@/lib/sector-data';
 import {
   Card,
@@ -12,7 +13,7 @@ import Link from 'next/link';
 export function SectorCard({ sector }: { sector: Sector }) {
   return (
     <Link href={`/${sector.slug}`} className="group block h-full">
-      <Card className="h-full transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1 bg-card text-foreground text-left border rounded-xl shadow-sm">
+      <Card className="h-full transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1 bg-card text-foreground text-left border hover:border-primary rounded-xl shadow-sm">
         <CardHeader>
           <div className="mb-4">
             <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10 text-primary">
@@ -34,3 +35,5 @@ export function SectorCard({ sector }: { sector: Sector }) {
     </Link>
   );
 }
+
+    
