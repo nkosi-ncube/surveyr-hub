@@ -18,7 +18,7 @@ import {
 import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox } from 'lucide-react';
 import { SectorSelectionPopup } from '@/components/SectorSelectionPopup';
 
-//hhh
+//hh
 const testimonials = [
   {
     name: 'Dr. Thando Molefe',
