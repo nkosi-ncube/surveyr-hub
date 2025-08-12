@@ -4,6 +4,8 @@ import { PostHogProvider as PHProvider } from 'posthog-js/react'
 import posthog from 'posthog-js'
 import { useEffect } from 'react'
 
+//HHHH
+
 export function PostHogPageview(): JSX.Element {
   const pathname = usePathname()
   const searchParams = useSearchParams()
