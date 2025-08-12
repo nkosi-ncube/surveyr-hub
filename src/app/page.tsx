@@ -16,9 +16,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox } from 'lucide-react';
-import { SectorSelectionPopup } from '@/components/SectorSelectionPopup';
 
-//hh
 const testimonials = [
   {
     name: 'Dr. Thando Molefe',
@@ -95,14 +93,6 @@ const faqItems = [
 
 
 export default function Home() {
-  const [popupOpen, setPopupOpen] = useState(false);
-  const [intent, setIntent] = useState<'research' | 'feedback' | null>(null);
-
-  const handleButtonClick = (selectedIntent: 'research' | 'feedback') => {
-    setIntent(selectedIntent);
-    setPopupOpen(true);
-  };
-
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground animate-in fade-in duration-500">
        <header className="sticky top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
@@ -116,7 +106,7 @@ export default function Home() {
                 <nav className="hidden md:flex items-center gap-8 text-base font-medium">
                     <Link href="#testimonials" className="text-muted-foreground hover:text-foreground">Testimonials</Link>
                     <Link href="#pricing" className="text-muted-foreground hover:text-foreground">Pricing</Link>
-                    <Link href="#use-cases" className="text-muted-foreground hover:text-foreground">Use Cases</Link>
+                    <Link href="/use-cases" className="text-muted-foreground hover:text-foreground">Use Cases</Link>
                     <Link href="/contact-us" className="text-muted-foreground hover:text-foreground">Contact Us</Link>
                 </nav>
                 <div className="flex items-center gap-4">
@@ -130,12 +120,6 @@ export default function Home() {
             </div>
         </div>
       </header>
-      
-      <SectorSelectionPopup 
-        isOpen={popupOpen} 
-        setIsOpen={setPopupOpen} 
-        intent={intent}
-      />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -150,11 +134,11 @@ export default function Home() {
                         A WhatsApp driven platform for engaging customer chats, capturing leads, collecting valuable feedback and boosting live events.
                      </p>
                      <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <Button size="lg" className="px-8 py-7 text-lg" onClick={() => handleButtonClick('research')}>
-                          For Quantitative Research
+                        <Button size="lg" className="px-8 py-7 text-lg" asChild>
+                          <Link href="/use-cases?intent=research">For Quantitative Research</Link>
                         </Button>
-                        <Button size="lg" variant="outline" className="px-8 py-7 text-lg" onClick={() => handleButtonClick('feedback')}>
-                          For Feedback Collection
+                        <Button size="lg" variant="outline" className="px-8 py-7 text-lg" asChild>
+                          <Link href="/use-cases?intent=feedback">For Feedback Collection</Link>
                         </Button>
                      </div>
                 </div>
@@ -281,20 +265,6 @@ export default function Home() {
                 </div>
             </div>
         </section>
-
-        {/* Use Cases Section */}
-        <section id="use-cases" className="py-20 lg:py-28 bg-background">
-            <div className="container mx-auto px-4 text-center">
-                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Solutions for Every Sector</h2>
-                 <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">Discover how Surveyr drives results across different industries. How can we help you today?</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {sectors.map((sector) => (
-                        <SectorCard key={sector.slug} sector={sector} />
-                    ))}
-                </div>
-            </div>
-        </section>
-
       </main>
       <SectorPageFooter />
     </div>
