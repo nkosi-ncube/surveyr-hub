@@ -2,7 +2,7 @@
 "use client"
 
 import type React from "react"
-import { useMemo, useState } from "react"
+import { useMemo, useState, useEffect } from "react"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { ExitIntentPopup } from "@/components/ExitIntentPopup"
 import {
   Check,
   ChevronRight,
@@ -200,9 +201,29 @@ function IntegrationCard({
 
 export default function Page() {
   const [topic, setTopic] = useState<string>("Understanding why users abandon our mobile app onboarding process")
+  const [showExitPopup, setShowExitPopup] = useState(false);
+
+  useEffect(() => {
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) {
+        const hasSeenPopup = document.cookie.includes('seenExitPopup=true');
+        if (!hasSeenPopup) {
+          setShowExitPopup(true);
+          document.cookie = 'seenExitPopup=true; path=/; max-age=86400'; // Expires in 1 day
+        }
+      }
+    };
+
+    document.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
 
   return (
     <div className="bg-background text-foreground">
+      <ExitIntentPopup open={showExitPopup} onOpenChange={setShowExitPopup} />
       {/* Hero */}
       <section className="relative overflow-hidden bg-accent">
         <div
