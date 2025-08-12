@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { ExitIntentPopup } from "@/components/ExitIntentPopup"
+import { useTypewriter } from "@/hooks/use-typewriter"
 import {
   Check,
   ChevronRight,
@@ -202,6 +203,7 @@ function IntegrationCard({
 export default function Page() {
   const [topic, setTopic] = useState<string>("Understanding why users abandon our mobile app onboarding process")
   const [showExitPopup, setShowExitPopup] = useState(false);
+  const typewriterText = useTypewriter("Tap into Deeper Data with WhatsApp AI Research");
 
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
@@ -270,8 +272,9 @@ export default function Page() {
               <Badge variant="outline" className="bg-card border-primary/50 text-primary font-medium">
                 New • WhatsApp-powered research
               </Badge>
-              <h1 className="text-3xl sm:text-5xl font-bold tracking-tight">
-                Tap into Deeper Data with WhatsApp AI Research
+              <h1 className="text-3xl sm:text-5xl font-bold tracking-tight h-24 sm:h-36">
+                {typewriterText}
+                <span className="inline-block w-1 h-10 sm:h-12 bg-foreground animate-pulse ml-1" />
               </h1>
               <p className="text-muted-foreground text-lg">
                 Unlock authentic user insights through WhatsApp AI interviews and digital diary studies. Achieve
@@ -307,7 +310,7 @@ export default function Page() {
             </div>
 
             {/* Interactive preview */}
-            <div id="try" className="lg:ml-auto w-full animate-float">
+            <div id="try" className="lg:ml-auto w-full">
               <Card className="shadow-lg">
                 <CardHeader className="space-y-2">
                   <CardTitle className="text-base md:text-lg">Try it: AI research insights</CardTitle>
