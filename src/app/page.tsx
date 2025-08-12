@@ -1,272 +1,646 @@
 
-'use client';
+"use client"
 
-import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { SectorCard } from '@/components/SectorCard';
-import { sectors } from '@/lib/sector-data';
-import { SectorPageFooter } from '@/components/layout/SectorPageFooter';
+import type React from "react"
+import { useMemo, useState } from "react"
+import Link from "next/link"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { CheckCircle, DraftingCompass, Gauge, Megaphone, TrendingUp, FileSignature, Inbox } from 'lucide-react';
+  Check,
+  ChevronRight,
+  MessageCircle,
+  BarChart3,
+  Sparkles,
+  Search,
+  ShieldCheck,
+  LayoutDashboard,
+  FileText,
+  Users,
+  Zap,
+  Lock,
+  Mail,
+} from "lucide-react"
 
-const testimonials = [
-  {
-    name: 'Dr. Thando Molefe',
-    title: 'Lead Pastor, GraceHill Church',
-    avatar: 'https://placehold.co/100x100.png',
-    dataAiHint: 'woman portrait',
-    quote: 'Surveyr has revolutionized how we connect with our congregation. The ability to send daily devotionals and gather prayer requests on a platform everyone uses has deepened our community bond significantly.',
-  },
-  {
-    name: 'Jabu Mthembu',
-    title: 'Event Coordinator, Spark Live',
-    avatar: 'https://placehold.co/100x100.png',
-    dataAiHint: 'man portrait',
-    quote: 'The live polling and Q&A features are game-changers for audience engagement. We get real-time feedback that helps us make every event better than the last. The platform is incredibly reliable.',
-  },
-  {
-    name: 'Aisha Patel',
-    title: 'Owner, The Daily Grind Cafe',
-    avatar: 'https://placehold.co/100x100.png',
-    dataAiHint: 'woman portrait',
-    quote: "As a small business, customer relationships are everything. Surveyr helps us offer instant support and send targeted promotions that our customers actually see and appreciate. It's an invaluable tool.",
-  },
-];
+type ResearchType = "interview" | "diary"
 
-const features = [
-    { Icon: DraftingCompass, title: "Intuitive Survey Builder", description: "Create engaging and interactive surveys in minutes with our easy-to-use survey builder." },
-    { Icon: Gauge, title: "Boosting live Events", description: "Increase audience engagement and participation with live polls, Q&As, and real-time feedback." },
-    { Icon: Megaphone, title: "WhatsApp Broadcast", description: "Reach a wider audience with targeted WhatsApp broadcasts for announcements and promotions." },
-    { Icon: TrendingUp, title: "Sentiment Analysis", description: "Gain valuable insights from customer feedback with our advanced sentiment analysis tools." },
-    { Icon: FileSignature, title: "ChatGPT Report Authoring", description: "Generate detailed and insightful reports from your survey data with the power of ChatGPT." },
-    { Icon: Inbox, title: "TeamBox", description: "Manage all your survey responses and team collaboration in one centralized inbox." },
-];
+function generateInsight(topic: string, type: ResearchType): string {
+  const seed = topic.trim().replace(/\s+/g, " ")
+  if (!seed) {
+    return type === "interview"
+      ? "Enter a research topic above to see how WhatsApp AI interviews generate deeper insights than traditional surveys."
+      : "Type a research question to see how AI-powered diary studies capture authentic user behaviors over time."
+  }
 
-const pricingTiers = [
-    {
-        name: "Free",
-        price: "$0/mo",
-        features: ["1 Active Survey", "100 Responses", "1 Seat", "24-hour Power Down", "Email support"],
-        buttonText: "Start For Free",
-        buttonVariant: "outline",
-    },
-    {
-        name: "Basic",
-        price: "R800 p/m",
-        features: ["Everything in Free plus:", "Multiple Active Surveys", "2,500 Responses", "3 Seats / Survey", "1 Custom Survey", "Sentiment Analysis", "AI-assisted Survey"],
-        buttonText: "Buy Now",
-        buttonVariant: "outline",
-    },
-    {
-        name: "Pro",
-        price: "R1500 p/m",
-        features: ["Everything in Basic plus:", "10,000 Responses", "5 Seats / Survey", "Custom Onboarding", "Sentiment Analysis", "Survey Data Download", "2022 Post-event Survey", "GenAI Prompts"],
-        buttonText: "Buy Now",
-        buttonVariant: "default",
-        popular: true
-    },
-    {
-        name: "Enterprise",
-        price: "On request",
-        features: ["Everything in Pro plus:", "Unlimited Responses", "Custom Seats / Survey", "Priority Support", "Dedicated Success Manager", "Custom SLAs", "Custom Integrations"],
-        buttonText: "Contact Us",
-        buttonVariant: "outline",
-    }
-];
+  if (type === "interview") {
+    return `🎯 Key Insight: ${seed}
 
-const faqItems = [
-    { question: "What is Surveyr?", answer: "Surveyr is a WhatsApp-driven platform for engaging customer chats, capturing leads, collecting valuable feedback, and boosting live events. We specialize in research and quantitative surveys." },
-    { question: "How can Surveyr help my business or organization?", answer: "Surveyr helps you connect with your audience on a platform they use daily, increasing engagement, gathering insights, and improving communication for research and feedback." },
-    { question: "Can I integrate Surveyr with other business tools?", answer: "Yes, our Enterprise plan offers custom integrations with your existing business tools and systems to streamline your workflow." },
-    { question: "What types of surveys can I create with Surveyr?", answer: "You can create a wide variety of surveys, from simple polls and quizzes for engagement to detailed feedback forms and quantitative market research questionnaires." },
-    { question: "How secure is the data we collect through Surveyr?", answer: "We take data security very seriously. All data is encrypted and stored securely, and we comply with all relevant data protection regulations." },
-    { question: "What support options are available if I need help using Surveyr?", answer: "We offer email support for all our users. Our Pro and Enterprise plans include priority support and a dedicated success manager." },
-];
+📊 WhatsApp Response Rate: 89% (vs 12% email)
+⏱️ Average Session: 8.5 minutes
+💬 Follow-up Questions: 4.2 per participant
 
+Top Themes:
+• Pain point: "Current solutions feel impersonal"
+• Preference: "WhatsApp feels more natural to me"
+• Behavior: Users respond 3x faster on WhatsApp
 
-export default function Home() {
+💡 Recommendation: Focus on personalized, conversational experiences that mirror WhatsApp's familiar interface.`
+  }
+
+  // diary study
+  return `📱 7-Day Diary Study: ${seed}
+
+📈 Engagement: 94% completion rate
+🔄 Daily Check-ins: 6.8/7 average
+📝 Rich Context: 2.3x more detailed responses
+
+Behavioral Patterns:
+• Peak usage: 7-9 PM weekdays
+• Context: "I use this when commuting"
+• Friction: "Too many steps to complete task"
+
+🎯 Insight: Users prefer micro-interactions during transition moments. Simplify onboarding flow.`
+}
+
+function ResponseRateChart() {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground animate-in fade-in duration-500">
-       <header className="sticky top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex h-20 items-center justify-between">
-                <Link href="/" aria-label="Back to homepage">
-                    <div className="flex items-center gap-2">
-                         <Image src="https://ik.imagekit.io/qamfbdbzl/surveyr-logo-small.fc888627a6e32ae314b0.png" alt="Surveyr Logo" width={150} height={36} />
-                    </div>
-                </Link>
-                <nav className="hidden md:flex items-center gap-8 text-base font-medium">
-                    <Link href="#testimonials" className="text-muted-foreground hover:text-foreground">Testimonials</Link>
-                    <Link href="#pricing" className="text-muted-foreground hover:text-foreground">Pricing</Link>
-                    <Link href="/use-cases" className="text-muted-foreground hover:text-foreground">Use Cases</Link>
-                    <Link href="/contact-us" className="text-muted-foreground hover:text-foreground">Contact Us</Link>
-                </nav>
-                <div className="flex items-center gap-4">
-                    <Button variant="ghost" asChild>
-                        <Link href="/login">Sign In</Link>
-                    </Button>
-                    <Button asChild>
-                        <Link href="/signup">Start Free Trial</Link>
-                    </Button>
-                </div>
-            </div>
-        </div>
-      </header>
+    <div className="space-y-3">
+      <div className="flex items-center justify-between text-sm">
+        <span>WhatsApp</span>
+        <span className="font-semibold text-primary">
+          89%
+        </span>
+      </div>
+      <div className="h-2 rounded-full overflow-hidden bg-muted">
+        <div className="h-full rounded-full bg-primary" style={{ width: "89%"}} />
+      </div>
 
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative bg-background pt-2">
-          <div className="container mx-auto px-4">
-             <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div className="text-center md:text-left">
-                     <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-foreground !leading-tight">
-                        Supercharge your conversations
-                     </h1>
-                     <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto md:mx-0 mt-6">
-                        A WhatsApp driven platform for engaging customer chats, capturing leads, collecting valuable feedback and boosting live events.
-                     </p>
-                     <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <Button size="lg" className="px-8 py-7 text-lg" asChild>
-                          <Link href="/use-cases?intent=research">For Quantitative Research</Link>
-                        </Button>
-                        <Button size="lg" variant="outline" className="px-8 py-7 text-lg" asChild>
-                          <Link href="/use-cases?intent=feedback">For Feedback Collection</Link>
-                        </Button>
-                     </div>
-                </div>
-                <div className="relative">
-                     <Image
-                        src="https://ik.imagekit.io/qamfbdbzl/ChatGPT%20Image%20Jul%2031,%202025,%2006_17_30%20AM.png"
-                        alt="Surveyr Platform Illustration"
-                        width={600}
-                        height={500}
-                        priority
-                        className="mx-auto animate-float"
-                     />
-                </div>
-             </div>
-          </div>
-        </section>
+      <div className="flex items-center justify-between text-sm">
+        <span>Email</span>
+        <span className="font-semibold text-muted-foreground">
+          12%
+        </span>
+      </div>
+      <div className="h-2 rounded-full overflow-hidden bg-muted">
+        <div className="h-full rounded-full bg-muted-foreground/50" style={{ width: "12%"}} />
+      </div>
 
-        {/* Trusted By Section */}
-        <section className="py-12 bg-secondary">
-            <div className="container mx-auto px-4 text-center">
-                <h3 className="text-muted-foreground font-medium mb-6">Trusted by organizations focused on impact</h3>
-                <div className="flex justify-center items-center gap-12 flex-wrap">
-                    <Image src="https://placehold.co/150x50.png" alt="Client Logo 1" width={150} height={50} data-ai-hint="company logo" className="opacity-60" />
-                    <Image src="https://placehold.co/150x50.png" alt="Client Logo 2" width={150} height={50} data-ai-hint="company logo" className="opacity-60" />
-                    <Image src="https://placehold.co/150x50.png" alt="Client Logo 3" width={150} height={50} data-ai-hint="company logo" className="opacity-60" />
-                    <Image src="https://placehold.co/150x50.png" alt="Client Logo 4" width={150} height={50} data-ai-hint="company logo" className="opacity-60" />
-                    <Image src="https://placehold.co/150x50.png" alt="Client Logo 5" width={150} height={50} data-ai-hint="company logo" className="opacity-60" />
-                </div>
-            </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section id="testimonials" className="py-20 lg:py-28 bg-background">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Leaders Choose Surveyr</h2>
-            <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">Hear what our clients have to say about their success.</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-card text-left p-6 flex flex-col border shadow-none rounded-xl">
-                    <CardContent className="flex-grow p-0">
-                        <p className="text-muted-foreground mb-6 text-base">"{testimonial.quote}"</p>
-                    </CardContent>
-                    <div className="flex items-center gap-4 mt-auto">
-                        <Image src={testimonial.avatar} alt={testimonial.name} width={48} height={48} className="rounded-full" data-ai-hint={testimonial.dataAiHint} />
-                        <div>
-                            <p className="font-semibold">{testimonial.name}</p>
-                            <p className="text-sm text-muted-foreground">{testimonial.title}</p>
-                        </div>
-                    </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section id="features" className="py-20 lg:py-28 bg-secondary">
-            <div className="container mx-auto px-4 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything You Need for Effective Research</h2>
-                <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">Surveyr provides a comprehensive suite of features to design, distribute, and analyze your surveys.</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-                    {features.map((feature, index) => (
-                        <Card key={index} className="p-6 bg-background border-border/50 rounded-xl shadow-sm">
-                            <div className="flex items-start gap-4 mb-4">
-                                <div className="p-3 rounded-lg bg-primary/10">
-                                    <feature.Icon className="w-6 h-6 text-primary" />
-                                </div>
-                                <h3 className="text-xl font-semibold pt-2">{feature.title}</h3>
-                            </div>
-                            <p className="text-muted-foreground pl-16">{feature.description}</p>
-                        </Card>
-                    ))}
-                </div>
-            </div>
-        </section>
-        
-        {/* Pricing Section */}
-        <section id="pricing" className="py-20 lg:py-28 bg-background">
-            <div className="container mx-auto px-4 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
-                <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">Choose the plan that fits your needs. No hidden fees.</p>
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-                    {pricingTiers.map((tier, index) => (
-                        <Card key={index} className={`flex flex-col text-left rounded-xl shadow-sm ${tier.popular ? 'border-2 border-primary relative' : 'border'}`}>
-                            {tier.popular && <div className="absolute top-0 right-4 -translate-y-1/2 bg-primary text-primary-foreground px-3 py-1 text-sm font-semibold rounded-full">Most Popular</div>}
-                            <CardHeader>
-                                <h3 className="text-xl font-semibold">{tier.name}</h3>
-                                <p className="text-3xl font-bold pt-2">{tier.price}</p>
-                            </CardHeader>
-                            <CardContent className="flex-grow">
-                                <ul className="space-y-3">
-                                    {tier.features.map((feature, fIndex) => (
-                                        <li key={fIndex} className="flex items-start gap-3">
-                                            <CheckCircle className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                                            <span className="text-muted-foreground">{feature}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </CardContent>
-                            <div className="p-6 pt-0 mt-6">
-                                <Button className="w-full" variant={tier.popular ? 'default' : 'outline'}>{tier.buttonText}</Button>
-                            </div>
-                        </Card>
-                    ))}
-                </div>
-            </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section id="faq" className="py-20 lg:py-28 bg-secondary">
-            <div className="container mx-auto px-4">
-                <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
-                <div className="max-w-3xl mx-auto">
-                    <Accordion type="single" collapsible className="w-full">
-                        {faqItems.map((item, index) => (
-                             <AccordionItem key={index} value={`item-${index}`} className="bg-background rounded-xl mb-4 px-6 border">
-                                <AccordionTrigger className="text-lg font-medium hover:no-underline text-left">{item.question}</AccordionTrigger>
-                                <AccordionContent className="text-muted-foreground pt-2 text-base text-left">
-                                    {item.answer}
-                                </AccordionContent>
-                            </AccordionItem>
-                        ))}
-                    </Accordion>
-                </div>
-            </div>
-        </section>
-      </main>
-      <SectorPageFooter />
+      <div className="flex items-center justify-between text-sm">
+        <span>SMS</span>
+        <span className="font-semibold text-muted-foreground">
+          23%
+        </span>
+      </div>
+      <div className="h-2 rounded-full overflow-hidden bg-muted">
+        <div className="h-full rounded-full bg-muted-foreground/50" style={{ width: "23%" }} />
+      </div>
     </div>
-  );
+  )
+}
+
+function ResearchPreview({
+  topic = "",
+  type = "interview",
+}: {
+  topic?: string
+  type?: ResearchType
+}) {
+  const content = useMemo(() => generateInsight(topic || "", type), [topic, type])
+
+  return (
+    <div className="rounded-xl border bg-card text-card-foreground shadow-sm">
+      <div className="flex items-center justify-between px-4 py-3 border-b">
+        <div className="flex items-center gap-2">
+          <span
+            className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium border bg-primary text-primary-foreground"
+          >
+            <MessageCircle className="h-3.5 w-3.5" />
+            <span className="capitalize">{type === "interview" ? "AI Interview" : "Diary Study"}</span>
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="h-2 w-2 rounded-full bg-primary" />
+          <div className="h-2 w-2 rounded-full bg-muted-foreground/30" />
+          <div className="h-2 w-2 rounded-full bg-muted-foreground/30" />
+        </div>
+      </div>
+      <div className="p-4">
+        <div className="flex items-start gap-3">
+          <div className="h-8 w-8 rounded-full flex items-center justify-center bg-accent">
+            <BarChart3 className="h-4 w-4 text-accent-foreground" />
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <div className="font-semibold">Research Insights</div>
+              <span className="text-xs text-muted-foreground">· Generated by AI</span>
+            </div>
+            <p className="whitespace-pre-wrap text-sm leading-relaxed mt-1">{content}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
+function StepCard({
+  step = 1,
+  title = "Step",
+  description = "Description",
+  icon = <Sparkles className="h-5 w-5" />,
+}: {
+  step?: number
+  title?: string
+  description?: string
+  icon?: React.ReactNode
+}) {
+  return (
+    <div className="relative rounded-xl border bg-card p-5 text-card-foreground shadow-sm">
+      <div className="absolute -top-3 left-5 rounded-full border bg-card px-2 py-0.5 text-xs font-medium">
+        Step {step}
+      </div>
+      <div className="flex items-start gap-3">
+        <div
+          className="h-9 w-9 rounded-md flex items-center justify-center shrink-0 bg-primary/10 text-primary"
+        >
+          {icon}
+        </div>
+        <div>
+          <div className="font-medium">{title}</div>
+          <p className="text-sm text-muted-foreground mt-1">{description}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function IntegrationCard({
+  title = "Integration",
+  description = "Description",
+  icon = <Sparkles className="h-5 w-5" />,
+}: {
+  title?: string
+  description?: string
+  icon?: React.ReactNode
+}) {
+  return (
+    <div className="rounded-xl border bg-card p-5 text-card-foreground shadow-sm">
+      <div className="flex items-center gap-3">
+        <div className="h-10 w-10 rounded-md bg-muted flex items-center justify-center">{icon}</div>
+        <div className="font-medium text-base">{title}</div>
+      </div>
+      <p className="text-sm text-muted-foreground mt-2">{description}</p>
+    </div>
+  )
+}
+
+export default function Page() {
+  const [topic, setTopic] = useState<string>("Understanding why users abandon our mobile app onboarding process")
+
+  return (
+    <div className="bg-background text-foreground">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-accent">
+        <div
+          className="absolute inset-0 -z-10"
+          aria-hidden="true"
+        />
+        <header className="container flex items-center justify-between py-5 px-4 md:px-6">
+          <Link href="/" className="flex items-center gap-2">
+            <div
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-primary-foreground bg-primary shadow"
+            >
+              <Search className="h-5 w-5" />
+            </div>
+            <span className="font-semibold text-lg tracking-tight">ResearchAI</span>
+            <span className="sr-only">ResearchAI home</span>
+          </Link>
+          <nav className="hidden md:flex items-center gap-6 text-sm">
+            <Link href="#features" className="text-muted-foreground hover:text-foreground">
+              Features
+            </Link>
+            <Link href="/use-cases" className="text-muted-foreground hover:text-foreground">
+              Use Cases
+            </Link>
+            <Link href="#integrations" className="text-muted-foreground hover:text-foreground">
+              Integrations
+            </Link>
+            <Link href="#faq" className="text-muted-foreground hover:text-foreground">
+              FAQ
+            </Link>
+          </nav>
+          <div className="flex items-center gap-2">
+            <Button asChild variant="ghost" className="hidden sm:inline-flex">
+              <Link href="#try">Try the demo</Link>
+            </Button>
+            <Button asChild>
+              <Link href="#cta">Get Started</Link>
+            </Button>
+          </div>
+        </header>
+
+        <div className="container px-4 md:px-6 pb-16 pt-10 lg:pt-16">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-12 items-center">
+            <div className="space-y-6">
+              <Badge variant="outline" className="bg-card border-primary/50 text-primary font-medium">
+                New • WhatsApp-powered research
+              </Badge>
+              <h1 className="text-3xl sm:text-5xl font-bold tracking-tight">
+                Tap into Deeper Data with WhatsApp AI Research
+              </h1>
+              <p className="text-muted-foreground text-lg">
+                Unlock authentic user insights through WhatsApp AI interviews and digital diary studies. Achieve
+                significantly higher response rates compared to email, with AI-assisted analysis tailored for African
+                and emerging markets.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button>
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Get Started
+                </Button>
+                <Button variant="outline" asChild>
+                  <Link href="#try">
+                    <ChevronRight className="h-4 w-4 mr-2" />
+                    See the demo
+                  </Link>
+                </Button>
+              </div>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <div className="inline-flex items-center gap-1.5">
+                  <ShieldCheck className="h-4 w-4 text-primary" />
+                  POPIA compliant
+                </div>
+                <div className="inline-flex items-center gap-1.5">
+                  <Lock className="h-4 w-4 text-primary" />
+                  Secure data
+                </div>
+                <div className="inline-flex items-center gap-1.5">
+                  <BarChart3 className="h-4 w-4 text-primary" />
+                  89% response rate
+                </div>
+              </div>
+            </div>
+
+            {/* Interactive preview */}
+            <div id="try" className="lg:ml-auto w-full">
+              <Card className="shadow-lg">
+                <CardHeader className="space-y-2">
+                  <CardTitle className="text-base md:text-lg">Try it: AI research insights</CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    Enter a research question. See how WhatsApp AI generates deeper insights.
+                  </p>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-start gap-2">
+                    <div className="relative flex-1">
+                      <Input
+                        aria-label="Your research question"
+                        placeholder="e.g., Why do users drop off during our checkout?"
+                        value={topic}
+                        onChange={(e) => setTopic(e.target.value)}
+                      />
+                    </div>
+                    <Button variant="secondary" type="button" onClick={() => setTopic("")}>
+                      Clear
+                    </Button>
+                  </div>
+
+                  <Tabs defaultValue="interview" className="w-full">
+                    <TabsList className="grid grid-cols-2">
+                      <TabsTrigger value="interview" className="flex items-center gap-2">
+                        <MessageCircle className="h-4 w-4" /> AI Interview
+                      </TabsTrigger>
+                      <TabsTrigger value="diary" className="flex items-center gap-2">
+                        <FileText className="h-4 w-4" /> Diary Study
+                      </TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="interview" className="mt-4">
+                      <ResearchPreview type="interview" topic={topic} />
+                    </TabsContent>
+                    <TabsContent value="diary" className="mt-4">
+                      <ResearchPreview type="diary" topic={topic} />
+                    </TabsContent>
+                  </Tabs>
+
+                  <div className="mt-4 p-4 bg-muted/50 rounded-lg">
+                    <h4 className="text-sm font-medium mb-3">Response Rate Comparison</h4>
+                    <ResponseRateChart />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Social proof */}
+          <div className="mt-16 md:mt-24">
+            <p className="text-center text-xs uppercase tracking-widest text-muted-foreground mb-6">
+              Trusted by research teams across Africa and emerging markets
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-6">
+              <span className="text-muted-foreground font-medium text-lg">Company A</span>
+              <span className="text-muted-foreground font-medium text-lg">Enterprise B</span>
+              <span className="text-muted-foreground font-medium text-lg">Startup C</span>
+              <span className="text-muted-foreground font-medium text-lg">Org D</span>
+               <span className="text-muted-foreground font-medium text-lg">Agency E</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section id="features" className="py-16 md:py-24 bg-background">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <Badge variant="outline" className="border-primary/50 text-primary font-medium">
+              Why ResearchAI
+            </Badge>
+            <h2 className="mt-3 text-2xl sm:text-4xl font-bold tracking-tight">
+              Higher engagement. Deeper insights. Faster results.
+            </h2>
+            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+              WhatsApp-powered research delivers 7x higher response rates with AI-assisted analysis.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <Card className="bg-card">
+              <CardHeader>
+                <div className="h-10 w-10 rounded-md flex items-center justify-center bg-primary/10 text-primary">
+                  <MessageCircle className="h-5 w-5" />
+                </div>
+                <CardTitle className="text-lg">WhatsApp AI interviews</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                Conduct natural, conversational interviews through WhatsApp with AI-powered follow-up questions and
+                real-time insights.
+              </CardContent>
+            </Card>
+            <Card className="bg-card">
+              <CardHeader>
+                <div className="h-10 w-10 rounded-md flex items-center justify-center bg-primary/10 text-primary">
+                  <FileText className="h-5 w-5" />
+                </div>
+                <CardTitle className="text-lg">Digital diary studies</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                Capture authentic behaviors over time with AI-assisted prompts and automated analysis of user journeys.
+              </CardContent>
+            </Card>
+            <Card className="bg-card">
+              <CardHeader>
+                <div className="h-10 w-10 rounded-md flex items-center justify-center bg-primary/10 text-primary">
+                  <Users className="h-5 w-5" />
+                </div>
+                <CardTitle className="text-lg">Smart panel management</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                Multi-channel outreach via Email, SMS, and WhatsApp with automated scheduling and participant tracking.
+              </CardContent>
+            </Card>
+            <Card className="bg-card">
+              <CardHeader>
+                <div className="h-10 w-10 rounded-md flex items-center justify-center bg-primary/10 text-primary">
+                  <BarChart3 className="h-5 w-5" />
+                </div>
+                <CardTitle className="text-lg">AI-powered insights</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                Automated theme extraction, sentiment analysis, and actionable recommendations from unstructured data.
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section id="how-it-works" className="py-16 md:py-24 bg-secondary">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+             <Badge variant="outline" className="bg-card border-primary/50 text-primary font-medium">Workflow</Badge>
+            <h2 className="mt-3 text-2xl sm:text-4xl font-bold tracking-tight">
+              From research question to insights in four steps
+            </h2>
+          </div>
+          <div className="mt-12 grid gap-6 md:grid-cols-4">
+            <StepCard
+              step={1}
+              title="Setup study"
+              description="Define research objectives, target demographics, and choose WhatsApp interviews or diary studies."
+              icon={<LayoutDashboard className="h-5 w-5" />}
+            />
+            <StepCard
+              step={2}
+              title="Recruit participants"
+              description="Multi-channel outreach via Email, SMS, and WhatsApp with automated follow-ups and scheduling."
+              icon={<Users className="h-5 w-5" />}
+            />
+            <StepCard
+              step={3}
+              title="Collect data"
+              description="AI-powered WhatsApp conversations with smart follow-up questions and real-time engagement tracking."
+              icon={<MessageCircle className="h-5 w-5" />}
+            />
+            <StepCard
+              step={4}
+              title="Generate insights"
+              description="Automated analysis with theme extraction, sentiment scoring, and actionable recommendations."
+              icon={<BarChart3 className="h-5 w-5" />}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Templates showcase */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+             <Badge variant="outline" className="border-primary/50 text-primary font-medium">
+              Research Templates
+            </Badge>
+            <h2 className="mt-3 text-2xl sm:text-4xl font-bold tracking-tight">Start with proven methodologies</h2>
+            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+              Pre-built research frameworks optimized for WhatsApp engagement and African markets.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              "User Journey Mapping",
+              "Product Feedback Loop",
+              "Brand Perception Study",
+              "Usability Testing",
+              "Customer Satisfaction",
+              "Market Entry Research",
+            ].map((t) => (
+              <div key={t} className="flex items-center justify-between rounded-md border bg-card px-4 py-3 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <Zap className="h-4 w-4 text-primary" />
+                  <span className="text-sm font-medium">{t}</span>
+                </div>
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href="#cta">Use</Link>
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Integrations */}
+      <section id="integrations" className="py-16 md:py-24 bg-secondary">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <Badge variant="outline" className="bg-card border-primary/50 text-primary font-medium">
+              Integrations
+            </Badge>
+            <h2 className="mt-3 text-2xl sm:text-4xl font-bold tracking-tight">Connect with your research stack</h2>
+            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+              Seamless integration with popular research and analytics tools.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <IntegrationCard
+              title="WhatsApp Business"
+              icon={<MessageCircle className="h-5 w-5" />}
+              description="Direct integration for high-engagement research conversations."
+            />
+            <IntegrationCard
+              title="Multi-channel outreach"
+              icon={<Mail className="h-5 w-5" />}
+              description="Email, SMS, and WhatsApp recruitment with automated follow-ups."
+            />
+            <IntegrationCard
+              title="Analytics platforms"
+              icon={<BarChart3 className="h-5 w-5" />}
+              description="Export insights to Tableau, Power BI, and other analytics tools."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-16 md:py-24 bg-background">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <Badge variant="outline" className="border-primary/50 text-primary font-medium">FAQ</Badge>
+            <h2 className="mt-3 text-2xl sm:text-4xl font-bold tracking-tight">Common questions</h2>
+          </div>
+          <div className="mx-auto mt-10 max-w-3xl">
+            <Accordion type="single" collapsible className="w-full space-y-3">
+              <AccordionItem value="a1" className="border rounded-md bg-card px-4">
+                <AccordionTrigger className="text-base hover:no-underline">Why is WhatsApp more effective than email for research?</AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  WhatsApp achieves 89% response rates vs 12% for email because it feels more personal and
+                  conversational. Participants are more likely to engage authentically in a familiar messaging
+                  environment.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="a2" className="border rounded-md bg-card px-4">
+                <AccordionTrigger className="text-base hover:no-underline">Which markets and languages are supported?</AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  We specialize in African and emerging markets with support for English, French, Portuguese, Arabic,
+                  and major local languages. Our AI is trained on regional communication patterns.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="a3" className="border rounded-md bg-card px-4">
+                <AccordionTrigger className="text-base hover:no-underline">How does AI assist with research analysis?</AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Our AI automatically extracts themes, performs sentiment analysis, identifies behavioral patterns, and
+                  generates actionable insights from unstructured conversation data, saving weeks of manual analysis.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="a4" className="border rounded-md bg-card px-4">
+                <AccordionTrigger className="text-base hover:no-underline">Is participant data secure and POPIA compliant?</AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Yes. We're fully POPIA compliant with end-to-end encryption, secure data storage, and participant
+                  consent management. Data is anonymized and can be deleted upon request.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section id="cta" className="py-16 md:py-24 bg-secondary">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight">Stop guessing. Start understanding.</h2>
+            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+              Get deeper insights with WhatsApp-powered AI research. Join leading teams across Africa and emerging
+              markets.
+            </p>
+          </div>
+          <div className="mx-auto mt-8 max-w-md">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                alert("Thanks! We'll be in touch soon.")
+              }}
+              className="flex gap-2"
+              aria-label="Get started with ResearchAI"
+            >
+              <Input type="email" required placeholder="you@company.com" aria-label="Email address" className="bg-card" />
+              <Button type="submit">
+                <Mail className="h-4 w-4 mr-2" />
+                Get Started
+              </Button>
+            </form>
+            <p className="mt-3 text-xs text-muted-foreground">Free consultation. No spam. POPIA compliant.</p>
+          </div>
+          <div className="mx-auto mt-6 max-w-md space-y-2 text-sm">
+            <div className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-primary" />
+              <span>89% response rates with WhatsApp interviews</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-primary" />
+              <span>AI-powered insights and analysis</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-primary" />
+              <span>POPIA compliant and secure</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t bg-background">
+        <div className="container px-4 md:px-6 py-8 flex flex-col sm:flex-row items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div
+              className="inline-flex h-8 w-8 items-center justify-center rounded-md text-primary-foreground bg-primary"
+            >
+              <Search className="h-4 w-4" />
+            </div>
+            <span className="font-semibold">ResearchAI</span>
+          </div>
+          <div className="sm:ml-auto flex items-center gap-6 text-sm">
+            <Link href="#features" className="text-muted-foreground hover:text-foreground">
+              Features
+            </Link>
+             <Link href="/use-cases" className="text-muted-foreground hover:text-foreground">
+              Use Cases
+            </Link>
+            <Link href="#integrations" className="text-muted-foreground hover:text-foreground">
+              Integrations
+            </Link>
+             <Link href="#" className="text-muted-foreground hover:text-foreground">
+              Privacy
+            </Link>
+            <Link href="#" className="text-muted-foreground hover:text-foreground">
+              Terms
+            </Link>
+          </div>
+        </div>
+        <div className="container px-4 md:px-6 pb-8 text-xs text-center sm:text-left text-muted-foreground">
+          © {new Date().getFullYear()} ResearchAI. All rights reserved.
+        </div>
+      </footer>
+    </div>
+  )
 }

@@ -4,31 +4,53 @@
 
 @layer base {
   :root {
-    --background: 257 50% 98%; /* Light Purple */
+    --background: 260 60% 98%; /* Light Purple-Gray */
     --foreground: 240 10% 3.9%;
-    --card: 257 50% 98%;
+    --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
-    --popover: 257 50% 98%;
+    --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 258 95% 72%; /* Vibrant Purple */
+    --primary: 260 48% 50%; /* Main Purple */
     --primary-foreground: 270 50% 98%;
-    --secondary: 257 40% 94%;
+    --secondary: 260 40% 94%;
     --secondary-foreground: 240 10% 3.9%;
-    --muted: 257 40% 96%;
+    --muted: 240 5% 96%;
     --muted-foreground: 240 4% 46%;
-    --accent: 221 92% 71%; /* Complementary Blue */
-    --accent-foreground: 240 10% 3.9%;
+    --accent: 260 48% 95%; /* Lighter Purple for accents */
+    --accent-foreground: 260 48% 30%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 257 30% 88%;
-    --input: 257 30% 88%;
-    --ring: 258 95% 72%;
-    --chart-1: 258 95% 72%;
-    --chart-2: 221 92% 71%;
+    --border: 240 5% 90%;
+    --input: 240 5% 90%;
+    --ring: 260 48% 50%;
+    --chart-1: 260 48% 50%;
+    --chart-2: 240 4% 46%;
     --chart-3: 280 75% 65%;
     --chart-4: 250 65% 55%;
     --chart-5: 240 50% 65%;
-    --radius: 0.75rem;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 260 48% 60%;
+    --primary-foreground: 270 50% 98%;
+    --secondary: 240 4% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 4% 10%;
+    --muted-foreground: 240 4% 60%;
+    --accent: 260 48% 15%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 4% 15%;
+    --input: 240 4% 15%;
+    --ring: 260 48% 60%;
   }
 }
 
@@ -38,19 +60,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-}
-
-.text-gradient {
-  background: linear-gradient(to right, hsl(var(--primary)) 20%, hsl(280 80% 65%));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.highlight {
-    background-color: hsl(var(--primary) / 0.1);
-    padding: 0.1rem 0.4rem;
-    border-radius: 0.3rem;
-    font-weight: 500;
-    color: hsl(var(--primary));
 }
